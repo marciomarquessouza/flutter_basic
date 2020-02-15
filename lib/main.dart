@@ -1,110 +1,66 @@
 import 'package:flutter/material.dart';
+import 'quotes.dart';
 
 void main() => runApp(MaterialApp(
-  home: CharacterCard(),
+  home: QuoteList(),
 ));
 
-class CharacterCard extends StatefulWidget {
+class QuoteList extends StatefulWidget {
+  QuoteList({Key key}) : super(key: key);
+
   @override
-  _CharacterCardState createState() => _CharacterCardState();
+  _QuoteListState createState() => _QuoteListState();
 }
 
-class _CharacterCardState extends State<CharacterCard> {
+class _QuoteListState extends State<QuoteList> {
 
-  int samuraiLevel = 0;
+  List<Quote> quotes = [
+    Quote(from: 'Flying Circus TV Show', text: 'And now for something completely different.'),
+    Quote(from: 'Life of Brian', text: "He's not the Messiah - he's a very naughty boy."),
+    Quote(from: 'Monty Python and the Holy Grail', text: 'Ni!'),
+  ];
+
+  Widget quoteCard(Quote quote) {
+    return Card(
+      margin: EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0),
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Text(
+              quote.text,
+              style: TextStyle(
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.grey[600],
+              ),
+            ),
+            SizedBox(height: 6.0),
+            Text(
+              quote.from,
+              style: TextStyle(
+                fontSize: 14.0,
+                color: Colors.grey[800],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.grey[200],
       appBar: AppBar(
-        backgroundColor: Colors.orange,
-        title: Text('Lion Man'),
-        elevation: 0.0,
+        title: Text('Monty Python Quotes'),
+        backgroundColor: Colors.redAccent,
         centerTitle: true,
       ),
-            floatingActionButton: FloatingActionButton(
-        child: Icon(
-          Icons.add,
-          color: Colors.white,
-        ),
-        backgroundColor: Colors.orange,
-        onPressed: () {
-          setState(() {
-            samuraiLevel += 1;
-          });
-        },
-      ),
-      body: Padding(
-        padding: EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Center(
-              child: CircleAvatar(
-                backgroundImage: AssetImage('assets/images/Lion_Man.png'),
-                radius: 40,
-              ),
-            ),
-            SizedBox(height: 10),
-            Divider(
-              height: 30.0,
-              color: Colors.grey,
-            ),
-            Text(
-              'NAME',
-              style: TextStyle(
-                color: Colors.grey[600],
-                letterSpacing: 2.0,
-              ),
-            ),
-            SizedBox(height: 10.0),
-            Text(
-              'Lion Man',
-              style: TextStyle(
-                color: Colors.amberAccent,
-                letterSpacing: 2.0,
-                fontWeight: FontWeight.bold,
-                fontSize: 28.0,
-              ),
-            ),
-            SizedBox(height: 30.0),
-            Text(
-              'CURRENT SAMURAI LEVEL',
-              style: TextStyle(
-                color: Colors.grey[600],
-                letterSpacing: 2.0,
-              ),
-            ),
-            SizedBox(height: 10.0),
-            Text(
-              '$samuraiLevel',
-              style: TextStyle(
-                color: Colors.amberAccent,
-                letterSpacing: 2.0,
-                fontWeight: FontWeight.bold,
-                fontSize: 28.0,
-              ),
-            ),
-            SizedBox(height: 30.0),
-            Row(
-              children: <Widget>[
-                Icon(
-                  Icons.mail,
-                  color: Colors.grey[400],
-                ),
-                SizedBox(width: 5.0,),
-                Text(
-                  'shumaru@lion-man.com',
-                  style: TextStyle(
-                    color: Colors.grey[400],
-                    letterSpacing: 1.0,
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
+      body: Column(
+        children: quotes.map((quote) => quoteCard(quote)).toList(),
       ),
     );
   }
