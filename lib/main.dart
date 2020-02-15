@@ -1,50 +1,90 @@
 import 'package:flutter/material.dart';
 
 void main() => runApp(MaterialApp(
-      home: Home(),
-    ));
+  home: CharacterCard(),
+));
 
-class Home extends StatelessWidget {
+class CharacterCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text('Flutter is Great'),
+        backgroundColor: Colors.orange,
+        title: Text('Lion Man'),
+        elevation: 0.0,
         centerTitle: true,
-        backgroundColor: Colors.pink[600],
       ),
-      body: Row(
-        children: <Widget>[
-          Expanded(
-            flex: 3,
-            child: Container(
-              padding: EdgeInsets.all(30.0),
-              color: Colors.cyan[300],
-              child: Text('1'),
+      body: Padding(
+        padding: EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Center(
+              child: CircleAvatar(
+                backgroundImage: AssetImage('assets/images/Lion_Man.png'),
+                radius: 40,
+              ),
             ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Container(
-              padding: EdgeInsets.all(30.0),
-              color: Colors.amber[300],
-              child: Text('2'),
+            SizedBox(height: 10),
+            Divider(
+              height: 30.0,
+              color: Colors.grey,
             ),
-          ),
-          Expanded(
-            flex: 1,
-            child: Container(
-              padding: EdgeInsets.all(30.0),
-              color: Colors.pinkAccent,
-              child: Text('3'),
+            Text(
+              'NAME',
+              style: TextStyle(
+                color: Colors.grey[600],
+                letterSpacing: 2.0,
+              ),
             ),
-          ),
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Text('Fire'),
-        onPressed: () {},
-        backgroundColor: Colors.pink[600],
+            SizedBox(height: 10.0),
+            Text(
+              'Lion Man',
+              style: TextStyle(
+                color: Colors.amberAccent,
+                letterSpacing: 2.0,
+                fontWeight: FontWeight.bold,
+                fontSize: 28.0,
+              ),
+            ),
+            SizedBox(height: 30.0),
+            Text(
+              'CURRENT SAMURAI LEVEL',
+              style: TextStyle(
+                color: Colors.grey[600],
+                letterSpacing: 2.0,
+              ),
+            ),
+            SizedBox(height: 10.0),
+            Text(
+              '8',
+              style: TextStyle(
+                color: Colors.amberAccent,
+                letterSpacing: 2.0,
+                fontWeight: FontWeight.bold,
+                fontSize: 28.0,
+              ),
+            ),
+            SizedBox(height: 30.0),
+            Row(
+              children: <Widget>[
+                Icon(
+                  Icons.mail,
+                  color: Colors.grey[400],
+                ),
+                SizedBox(width: 5.0,),
+                Text(
+                  'shumaru@lion-man.com',
+                  style: TextStyle(
+                    color: Colors.grey[400],
+                    letterSpacing: 1.0,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
