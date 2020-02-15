@@ -4,7 +4,15 @@ void main() => runApp(MaterialApp(
   home: CharacterCard(),
 ));
 
-class CharacterCard extends StatelessWidget {
+class CharacterCard extends StatefulWidget {
+  @override
+  _CharacterCardState createState() => _CharacterCardState();
+}
+
+class _CharacterCardState extends State<CharacterCard> {
+
+  int samuraiLevel = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -14,6 +22,18 @@ class CharacterCard extends StatelessWidget {
         title: Text('Lion Man'),
         elevation: 0.0,
         centerTitle: true,
+      ),
+            floatingActionButton: FloatingActionButton(
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+        backgroundColor: Colors.orange,
+        onPressed: () {
+          setState(() {
+            samuraiLevel += 1;
+          });
+        },
       ),
       body: Padding(
         padding: EdgeInsets.fromLTRB(30.0, 40.0, 30.0, 0.0),
@@ -58,7 +78,7 @@ class CharacterCard extends StatelessWidget {
             ),
             SizedBox(height: 10.0),
             Text(
-              '8',
+              '$samuraiLevel',
               style: TextStyle(
                 color: Colors.amberAccent,
                 letterSpacing: 2.0,
